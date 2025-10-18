@@ -78,7 +78,7 @@ func runRun(ctx context.Context, ro options.RunOptions, args []string, signers .
 
 	attestors := alwaysRunAttestors
 	if len(args) > 0 {
-		attestors = append(attestors, commandrun.New(commandrun.WithCommand(args), commandrun.WithTracing(ro.Tracing)))
+		attestors = append(attestors, commandrun.New(commandrun.WithCommand(args), commandrun.WithTracing(ro.Tracing), commandrun.WithNetwork(ro.Network)))
 	}
 
 	for _, a := range ro.Attestations {

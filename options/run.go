@@ -38,6 +38,7 @@ type RunOptions struct {
 	OutFilePath              string
 	StepName                 string
 	Tracing                  bool
+	Network                  bool
 	TimestampServers         []string
 	AttestorOptSetters       map[string][]func(attestation.Attestor) (attestation.Attestor, error)
 	EnvFilterSensitiveVars   bool
@@ -66,6 +67,7 @@ func (ro *RunOptions) AddFlags(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&ro.OutFilePath, "outfile", "o", "", "File to write signed data to")
 	cmd.Flags().StringVarP(&ro.StepName, "step", "s", "", "Name of the step being run")
 	cmd.Flags().BoolVarP(&ro.Tracing, "trace", "r", false, "Enable tracing for the command")
+	cmd.Flags().BoolVarP(&ro.Network, "network", "n", false, "Enable tracing network calls")
 	cmd.Flags().StringSliceVarP(&ro.TimestampServers, "timestamp-servers", "t", []string{}, "Timestamp Authority Servers to use when signing envelope")
 
 	// Environment variables flags
