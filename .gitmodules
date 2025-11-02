@@ -1,3 +1,0 @@
-[submodule "cmd/witprox"]
-	path = cmd/witprox
-	url = https://github.com/stupendoussuperpowers/witprox.git
