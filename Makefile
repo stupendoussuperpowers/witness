@@ -8,7 +8,7 @@ BUILDFLAGS := -trimpath
 clean: ## Clean the binary directory
 	rm -rf $(BINDIR)
 
-build: build-witness build-witnessd ## Build the binary
+build: build-witness ## Build the binary
 
 build-witness:
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build $(BUILDFLAGS) -o $(BINDIR)/$(BINNAME) ./main.go
