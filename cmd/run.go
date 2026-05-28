@@ -77,18 +77,16 @@ func runRun(ctx context.Context, ro options.RunOptions, args []string, signers .
 	}
 
 	traceBackend := ro.TraceBackend
-	if ro.EBPF {
-		traceBackend = commandrun.TraceBackendEBPF
+	if traceBackend == "" {
+		traceBackend = commandrun.TraceBackendPtrace
 	}
-	if traceBackend != commandrun.TraceBackendPtrace && traceBackend != commandrun.TraceBackendEBPF {
-		return fmt.Errorf("unsupported trace backend %q", traceBackend)
-	}
+	tracing := ro.Tracing || traceBackend != commandrun.TraceBackendPtrace
 
 	attestors := alwaysRunAttestors
 	if len(args) > 0 {
 		attestors = append(attestors, commandrun.New(
 			commandrun.WithCommand(args),
-			commandrun.WithTracing(ro.Tracing),
+			commandrun.WithTracing(tracing),
 			commandrun.WithTraceBackend(traceBackend),
 		))
 	}
